@@ -1,0 +1,22 @@
+<input type="text" id="userIdFirstWay" list="dynmicUserIds" [formControl]="searchAddressCtrl" style="width: 100%;height: 50px;" (change)="onOptionChanged(searchAddressCtrl.value)"  autocomplete=”on”/>
+<datalist id="dynmicUserIds">
+  <option *ngFor="let option of filteredData" [value]="option.title">
+    {{option.title}}
+  </option>
+</datalist>
+<br /><br /><br />
+
+<h3>Search...</h3>
+<mat-form-field class="full-width">
+  <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchAddressCtrl">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" [displayWith]="displayFn">
+    <!-- <mat-option *ngIf="isLoading" class="is-loading" [value]="''">Loading...</mat-option> -->
+    <ng-container *ngIf="!isLoading">
+      <mat-option *ngFor="let item of filteredData" [value]="item">
+        <span><b>{{item.title}}</b>&nbsp;  ( {{item.address.countryName}}  )</span>
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>
+
+<app-ng-auto></app-ng-auto>

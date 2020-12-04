@@ -1,0 +1,32 @@
+<div class="ng-autocomplete">
+  <ng-autocomplete 
+      [data]="data" 
+      [searchKeyword]="keyword" 
+      (selected)='selectEvent($event)'
+      (inputChanged)='getServerResponse($event)' 
+      (inputFocused)='onFocused($event)' 
+      [itemTemplate]="itemTemplate" 
+      (inputCleared)="searchCleared()"
+      [notFoundTemplate]="notFoundTemplate" 
+      [debounceTime]="500" 
+      [isLoading]="isLoadingResult" 
+      [minQueryLength]="2" 
+      placeHolder="Search Movies. eg 'gun'"
+  >
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+      <a href="javascript:void(0)">
+          <div class="row">
+              
+              <div class="col-12">
+                  <span [innerHTML]="item?.title"></span><i>({{item?.address.countryName}})</i>
+              </div>
+          </div>
+      </a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+      {{errorMsg}}
+  </ng-template>
+</div>

@@ -1,0 +1,109 @@
+
+<div class="auto-container">
+  <h3>Select Country</h3>
+  <mat-form-field class="full-width">
+    <input type="text"
+           placeholder="Select Country"
+           aria-label="Country"
+           matInput
+           [formControl]="countryCtrl"
+           [matAutocomplete]="autoCountry">
+    <mat-autocomplete #autoCountry="matAutocomplete" [displayWith]="displayCountry" (optionSelected)="selectedCountry($event)">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <h3>Select Language( Default: US English )</h3>
+  <mat-form-field class="full-width">
+    <input type="text"
+           placeholder="Select Language"
+           aria-label="Language"
+           matInput
+           [formControl]="langCtrl"
+           [matAutocomplete]="autoLang">
+    <mat-autocomplete #autoLang="matAutocomplete" [displayWith]="displayLang" (optionSelected)="selectedLang($event)">
+      <mat-option *ngFor="let option of optionsLang" [value]="option">
+        {{option.td[3]}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  
+  <!-- <h3>Search...</h3>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchAddressCtrl">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" [displayWith]="displayFn">
+      <mat-option *ngIf="isLoading" class="is-loading" [value]="''">Loading...</mat-option>
+      <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let item of filteredData" [value]="item">
+          <span><b>{{item.title}}</b>&nbsp;  ( {{item.address.countryName}}  )</span>
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field> -->
+
+  <br>
+
+  <!-- <ng-container *ngIf="errorMsg; else elseTemplate">
+    {{errorMsg}}
+  </ng-container>
+  <ng-template #elseTemplate>
+    <h2>Selected Value: {{searchAddressCtrl.value?.title ? searchAddressCtrl.value?.title : 'No Results'}}</h2>
+    <br>
+    <div>
+      <ng-template [ngIf]="address?.street">
+        <mat-form-field class="full-width">
+          <mat-label>Street</mat-label>
+          <input matInput  value={{address?.street}}>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template [ngIf]="address?.houseNumber">
+        <mat-form-field class="full-width">
+          <mat-label>House Number</mat-label>
+          <input matInput  value={{address?.houseNumber}}>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template [ngIf]="address?.label">
+        <mat-form-field class="full-width">
+          <mat-label>Information</mat-label>
+          <input matInput  value={{address?.label}}>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template [ngIf]="address?.district">
+        <mat-form-field class="full-width">
+          <mat-label>District</mat-label>
+          <input matInput  value={{address?.district}}>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template [ngIf]="address?.postalCode">
+        <mat-form-field class="full-width">
+          <mat-label>Postal Code</mat-label>
+          <input matInput  value={{address?.postalCode}}>
+        </mat-form-field>
+      </ng-template>
+
+      <ng-template [ngIf]="address?.state">
+        <mat-form-field class="full-width">
+          <mat-label>State</mat-label>
+          <input matInput  value={{address?.state}}>
+        </mat-form-field>
+      </ng-template>
+      
+    </div>
+  </ng-template> -->
+</div>
+
+<br />
+<div class="auto-container">
+  <app-here-suggest appCode={{appCode}} lat={{lat}} lng={{lng}} country={{country}} lang={{lang}} (optionSelected)="selectedAddress($event)"></app-here-suggest>
+</div>
+<br>
+<div class="auto-container">
+
+  <h3>{{result?.address.postalCode}}</h3>
+</div>
